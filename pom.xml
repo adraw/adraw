@@ -4,4 +4,7 @@
   <artifactId>adraw</artifactId>
   <version>1.0</version>
   <packaging>pom</packaging>
+  <modules>
+  	<module>adraw.framework</module>
+  </modules>
 </project>
