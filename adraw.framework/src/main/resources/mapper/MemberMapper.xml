@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="io.github.adraw.framework.mapper.MemberMapper" >
+  <resultMap id="BaseResultMap" type="io.github.adraw.framework.model.Member" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="avatarId" property="avatarId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="profession" property="profession" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="height" property="height" jdbcType="REAL" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <select id="list4Public" parameterType="io.github.adraw.framework.model.Member" resultMap="BaseResultMap">
+     select 
+           m.id,
+           m.name,
+           m.sex,
+           m.height,
+           a.id avatarId 
+     from li_member m 
+     left join li_archive a on m.id = a.business_id and a.business_type = 'member'
+  </select>
+  
+  <select id="lockById" parameterType="long" resultMap="BaseResultMap">
+  	select id from li_member where id = #{id} for update
+  </select>
+  
+</mapper>
